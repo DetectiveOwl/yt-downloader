@@ -1,0 +1,14 @@
+{
+  "name": "youtube-mp3-downloader",
+  "version": "1.0.0",
+  "description": "Scarica audio da YouTube in formato MP3",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "fluent-ffmpeg": "^2.1.2",
+    "uuid": "^9.0.0"
+  }
+}

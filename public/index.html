@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Scarica audio e video da YouTube, SoundCloud e Spotify in formato MP3, WAV o MP4. Semplice, veloce e gratuito.">
+  <title>Media Downloader</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient background parallax -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="nav-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>Media Downloader</span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Sorgenti</a>
+        <a href="#">Formato</a>
+        <a href="#" class="nav-cta">Inizia</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Hero Section -->
+    <header class="header">
+      <div class="header-content">
+        <h1>Acquisisci ogni <br/>dettaglio.</h1>
+        <p class="subtitle">Estrai audio e video da YouTube, SoundCloud e Spotify con una qualità senza compromessi. Progettato per l'essenziale.</p>
+      </div>
+    </header>
+
+    <!-- Card -->
+    <div class="card">
+
+      <!-- URL Input -->
+      <div class="input-group">
+        <div class="input-wrapper">
+          <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+          <input
+            type="url"
+            id="urlInput"
+            placeholder="Incolla un link qui..."
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button id="clearBtn" class="clear-btn" title="Cancella" aria-label="Cancella URL">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Platform Badge -->
+      <div id="platformBadge" class="platform-badge hidden">
+        <span id="platformIcon" class="platform-icon"></span>
+        <span id="platformName" class="platform-name"></span>
+      </div>
+
+      <!-- Preview -->
+      <div id="videoPreview" class="video-preview hidden">
+        <div class="preview-img-wrapper">
+          <img id="previewThumb" class="preview-thumb" alt="Anteprima" src="">
+          <div class="preview-overlay"></div>
+        </div>
+        <div class="preview-info">
+          <h3 id="previewTitle" class="preview-title"></h3>
+          <span id="previewChannel" class="preview-channel"></span>
+          <span id="previewDuration" class="preview-duration"></span>
+        </div>
+      </div>
+
+      <!-- Format Selector -->
+      <div class="format-selector">
+        <label class="radio-label">
+          <input type="radio" name="format" value="mp3" checked>
+          <span class="radio-text">MP3</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="format" value="wav">
+          <span class="radio-text">WAV</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="format" value="mp4">
+          <span class="radio-text">MP4</span>
+        </label>
+      </div>
+
+      <!-- Quality Selector (solo per MP4) -->
+      <div id="qualitySelector" class="quality-selector hidden">
+        <span class="quality-label">Risoluzione</span>
+        <div class="quality-options">
+          <label class="quality-option">
+            <input type="radio" name="quality" value="1080" checked>
+            <span class="quality-text">1080p</span>
+          </label>
+          <label class="quality-option">
+            <input type="radio" name="quality" value="1440">
+            <span class="quality-text">1440p</span>
+          </label>
+          <label class="quality-option">
+            <input type="radio" name="quality" value="2160">
+            <span class="quality-text">4K</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Download Button -->
+      <button id="downloadBtn" class="download-btn" disabled>
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span class="btn-text">Scarica MP3</span>
+      </button>
+
+      <!-- Status -->
+      <div id="statusBar" class="status-bar hidden">
+        <div class="status-indicator">
+          <div class="spinner"></div>
+          <span id="statusText" class="status-text">Inizializzazione...</span>
+        </div>
+        <div class="progress-track">
+          <div id="progressBar" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div id="errorBar" class="error-bar hidden">
+        <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="15" y1="9" x2="9" y2="15"/>
+          <line x1="9" y1="9" x2="15" y2="15"/>
+        </svg>
+        <span id="errorText" class="error-text"></span>
+      </div>
+
+      <!-- Success -->
+      <div id="successBar" class="success-bar hidden">
+        <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <span class="success-text">Download completato!</span>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <p>&copy; 2026 Media Downloader. High-Tech Minimalist.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#">Privacy</a>
+        <a href="#">Termini</a>
+        <a href="#">Sviluppatori</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

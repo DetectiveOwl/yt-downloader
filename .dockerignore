@@ -1,0 +1,8 @@
+node_modules
+temp
+.git
+.env
+.DS_Store
+*.bat
+*.vbs
+*.url
