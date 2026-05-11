@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCTO — Riccardo Mello</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css" />
+  <style>
+    /* ── Base ── */
+    :root {
+      --bg: #FAFAF7;
+      --dark: #1a1a1a;
+      --mid: #444;
+      --accent: #2c5f8a;
+      --card-border: #d8d8d0;
+      --card-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      --tag-bg: #e8edf2;
+      --tag-fg: #2c5f8a;
+    }
+
+    .reveal-viewport { background: var(--bg); }
+    .reveal { background: var(--bg); }
+    .reveal .slides { font-family: 'Helvetica Neue', Arial, sans-serif; color: var(--dark); }
+
+    /* ── Typography ── */
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--dark);
+      text-transform: none;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .reveal h1 { font-size: 1.9em; margin-bottom: 0.3em; }
+    .reveal h2 { font-size: 1.5em; margin-bottom: 0.4em; }
+    .reveal p, .reveal li { font-size: 0.82em; line-height: 1.6; color: var(--mid); }
+
+    /* ── Section tag ── */
+    .section-tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-fg);
+      font-size: 0.62em;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3em 0.8em;
+      border-radius: 3px;
+      margin-bottom: 0.6em;
+    }
+
+    /* ── Cards ── */
+    .cards {
+      display: flex;
+      gap: 1em;
+      margin-top: 0.8em;
+      justify-content: center;
+    }
+    .card {
+      flex: 1;
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      box-shadow: var(--card-shadow);
+      padding: 1em 1.1em;
+      text-align: left;
+    }
+    .card h3 {
+      font-family: Georgia, serif;
+      font-size: 0.82em;
+      color: var(--accent);
+      margin: 0 0 0.4em 0;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 0.3em;
+    }
+    .card p { font-size: 0.76em; margin: 0; color: var(--mid); }
+
+    /* ── Two-column layout ── */
+    .two-col {
+      display: flex;
+      gap: 1.4em;
+      margin-top: 0.8em;
+      align-items: flex-start;
+    }
+    .two-col .col {
+      flex: 1;
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      box-shadow: var(--card-shadow);
+      padding: 1em 1.2em;
+      text-align: left;
+    }
+    .two-col .col h3 {
+      font-family: Georgia, serif;
+      font-size: 0.8em;
+      color: var(--accent);
+      margin: 0 0 0.5em 0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .two-col .col p, .two-col .col li { font-size: 0.76em; color: var(--mid); }
+    .two-col .col ul { margin: 0; padding-left: 1.1em; }
+    .two-col .col li { margin-bottom: 0.25em; }
+
+    /* ── Three-column layout ── */
+    .three-col {
+      display: flex;
+      gap: 1em;
+      margin-top: 0.8em;
+      align-items: flex-start;
+    }
+    .three-col .col {
+      flex: 1;
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      box-shadow: var(--card-shadow);
+      padding: 0.9em 1em;
+      text-align: left;
+    }
+    .three-col .col h3 {
+      font-family: Georgia, serif;
+      font-size: 0.76em;
+      color: var(--accent);
+      margin: 0 0 0.4em 0;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 0.25em;
+    }
+    .three-col .col p, .three-col .col li { font-size: 0.72em; color: var(--mid); margin: 0; }
+    .three-col .col ul { margin: 0.3em 0 0 0; padding-left: 1em; }
+    .three-col .col li { margin-bottom: 0.2em; }
+
+    /* ── Bullet list items ── */
+    .item-list { list-style: none; padding: 0; margin: 0.6em 0 0 0; text-align: left; }
+    .item-list li {
+      padding: 0.55em 0.8em;
+      border-left: 3px solid var(--accent);
+      background: #fff;
+      border-radius: 0 4px 4px 0;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 0.5em;
+      font-size: 0.78em;
+    }
+    .item-list li strong { color: var(--dark); font-size: 1em; }
+
+    /* ── Cover slide ── */
+    .cover-wrap { text-align: center; }
+    .cover-wrap h1 { font-size: 1.7em; color: var(--dark); margin-bottom: 0.2em; }
+    .cover-subtitle { font-size: 0.88em; color: var(--mid); margin-bottom: 1em; }
+    .cover-labels {
+      display: flex;
+      justify-content: center;
+      gap: 0.8em;
+      flex-wrap: wrap;
+      margin-top: 0.8em;
+    }
+    .cover-label {
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 5px;
+      box-shadow: var(--card-shadow);
+      padding: 0.55em 1.1em;
+      font-size: 0.72em;
+      color: var(--mid);
+    }
+    .cover-label strong { color: var(--accent); display: block; font-size: 1em; margin-bottom: 0.1em; }
+    .cover-rule {
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.6em auto 0.6em;
+      border: none;
+      border-radius: 2px;
+    }
+
+    /* ── Body text box ── */
+    .body-box {
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      box-shadow: var(--card-shadow);
+      padding: 1em 1.4em;
+      margin-top: 0.8em;
+      text-align: left;
+    }
+    .body-box p { font-size: 0.82em; margin: 0; }
+
+    /* ── Footer quote ── */
+    .footer-quote {
+      margin-top: 1.2em;
+      font-style: italic;
+      font-size: 0.78em;
+      color: var(--accent);
+      border-top: 1px solid var(--card-border);
+      padding-top: 0.7em;
+    }
+
+    /* ── Reveal overrides ── */
+    .reveal .slide-number { display: none; }
+    .reveal section { padding: 1.8em 2.4em; box-sizing: border-box; }
+
+    /* ── Print / PDF ── */
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      html, body { margin: 0; padding: 0; background: var(--bg); }
+      .reveal-viewport, .reveal, .reveal .slides, .reveal .slides section { background: var(--bg) !important; }
+      .reveal .slides section {
+        display: block !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        page-break-after: always;
+        break-after: page;
+        overflow: hidden;
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 1 — COVER
+    ══════════════════════════════════════════════ -->
+    <section>
+      <div class="cover-wrap">
+        <h1>PCTO</h1>
+        <hr class="cover-rule" />
+        <p style="font-family:Georgia,serif;font-size:0.95em;color:var(--mid);margin-bottom:0.15em;">Percorso per le Competenze Trasversali e l'Orientamento</p>
+        <p class="cover-subtitle">Riccardo Mello &nbsp;·&nbsp; Liceo Scientifico Arturo Tosi &nbsp;·&nbsp; Classe 3I → 5I</p>
+        <div class="cover-labels">
+          <div class="cover-label"><strong>3° Anno</strong>Tirocinio didattico</div>
+          <div class="cover-label"><strong>4° Anno</strong>Biotecnologie e DNA</div>
+          <div class="cover-label"><strong>5° Anno</strong>Sostenibilità e innovazione</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 2 — 3° Anno · Tirocinio
+    ══════════════════════════════════════════════ -->
+    <section>
+      <span class="section-tag">3° Anno · Tirocinio</span>
+      <h2>Un giorno da insegnante</h2>
+      <div class="body-box">
+        <p>Il tirocinio si è tenuto presso la scuola secondaria di primo grado "Ezio Crespi". Prima di iniziare le attività, sono stati selezionati e progettati esperimenti di chimica calibrati sul livello degli studenti della classe ospitante.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 3 — 3° Anno · Attività
+    ══════════════════════════════════════════════ -->
+    <section>
+      <span class="section-tag">3° Anno · Attività</span>
+      <h2>Tre fasi, un unico obiettivo</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Progettazione</h3>
+          <p>Selezione di esperimenti differenziati, adattati per complessità alla classe coinvolta.</p>
+        </div>
+        <div class="card">
+          <h3>Conduzione</h3>
+          <p>Presentazione e guida degli esperimenti, con spiegazione delle reazioni osservate.</p>
+        </div>
+        <div class="card">
+          <h3>Dialogo</h3>
+          <p>Risposta alle domande degli studenti, stimolando pensiero critico e curiosità scientifica.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 4 — 3° Anno · Riflessioni
+    ══════════════════════════════════════════════ -->
+    <section>
+      <span class="section-tag">3° Anno · Riflessioni</span>
+      <h2>Cosa ho portato a casa</h2>
+      <ul class="item-list">
+        <li><strong>Comunicazione adattiva:</strong> Spiegare concetti complessi con linguaggio accessibile a un pubblico giovane.</li>
+        <li><strong>Collaborazione:</strong> Lavorare in gruppo per superare imprevisti in modo efficace.</li>
+        <li><strong>Gestione dell'attenzione:</strong> Comprendere la difficoltà di mantenere coinvolta una classe intera.</li>
+      </ul>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 5 — 4° Anno · Project Work
+    ══════════════════════════════════════════════ -->
+    <section>
+      <span class="section-tag">4° Anno · Project Work</span>
+      <h2>DNA sotto la lente: PCR, Elettroforesi e Scienze Forensi</h2>
+      <div class="two-col">
+        <div class="col">
+          <h3>Descrizione</h3>
+          <p>Il project work del quarto anno ha approfondito le principali tecniche di analisi molecolare del DNA, con applicazioni in ambito diagnostico, scientifico e forense.</p>
+        </div>
+        <div class="col">
+          <h3>Tecniche</h3>
+          <ul>
+            <li>PCR e amplificazione del DNA</li>
+            <li>Elettroforesi su gel</li>
+            <li>DNA Fingerprinting</li>
+            <li>Estrazione del DNA</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 6 — 4° Anno · Tecniche
+    ══════════════════════════════════════════════ -->
+    <section>
+      <span class="section-tag">4° Anno · Tecniche</span>
+      <h2>Quattro strumenti della biologia molecolare</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>PCR</h3>
+          <p>Amplificazione esponenziale di sequenze specifiche di DNA. Fondamentale in medicina, ricerca e diagnostica forense.</p>
+        </div>
+        <div class="card">
+          <h3>Elettroforesi</h3>
+          <p>Separazione dei frammenti di DNA su gel in base alla dimensione. Permette di leggere e confrontare profili genetici.</p>
+        </div>
+        <div class="card">
+          <h3>DNA Fingerprinting</h3>
+          <p>Identificazione univoca tramite profilo genetico. Usata in criminologia, test di paternità e tassonomia.</p>
+        </div>
+        <div class="card">
+          <h3>Estrazione DNA</h3>
+          <p>Isolamento del materiale genetico tramite protocolli di laboratorio. Base di ogni analisi molecolare.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 7 — 5° Anno · Progetto
+    ══════════════════════════════════════════════ -->
+    <section>
+      <span class="section-tag">5° Anno · Progetto</span>
+      <h2>EnergyHub — Energia, comunità, futuro</h2>
+      <div class="body-box">
+        <p>EnergyHub è un centro comunitario sostenibile alimentato interamente da fonti rinnovabili, progettato per promuovere uno stile di vita a impatto zero, in linea con gli obiettivi dell'Agenda 2030 delle Nazioni Unite.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 8 — 5° Anno · Sostenibilità
+    ══════════════════════════════════════════════ -->
+    <section>
+      <span class="section-tag">5° Anno · Sostenibilità</span>
+      <h2>Tecnologie per emissioni zero</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Pannelli Fotovoltaici (500 kW)</h3>
+          <p>Copertura del 100% del fabbisogno energetico, installati sulla struttura e sulla serra integrata.</p>
+        </div>
+        <div class="card">
+          <h3>Batterie di Accumulo</h3>
+          <p>Stoccaggio dell'energia in eccesso per garantire continuità nelle ore notturne.</p>
+        </div>
+        <div class="card">
+          <h3>Pompe di Calore Geotermiche</h3>
+          <p>Riscaldamento e raffrescamento con efficienza quattro volte superiore ai metodi tradizionali.</p>
+        </div>
+        <div class="card">
+          <h3>Raccolta Acqua Piovana</h3>
+          <p>Riduzione del consumo idrico del 40%, per irrigazione e usi non potabili.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 9 — 5° Anno · Impatto
+    ══════════════════════════════════════════════ -->
+    <section>
+      <span class="section-tag">5° Anno · Impatto</span>
+      <h2>Budget, SDG e fasi di realizzazione</h2>
+      <div class="three-col">
+        <div class="col">
+          <h3>Budget</h3>
+          <p>10 milioni di euro.</p>
+          <p style="margin-top:0.4em;">Fondi PNRR fino a 6,9 M€ e contributi comunali.</p>
+        </div>
+        <div class="col">
+          <h3>SDG Agenda 2030</h3>
+          <ul>
+            <li>Goal 3 — Salute e Benessere</li>
+            <li>Goal 7 — Energia Pulita</li>
+            <li>Goal 11 — Città Sostenibili</li>
+            <li>Goal 13 — Azione per il Clima</li>
+            <li>Goal 15 — Vita sulla Terra</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Roadmap</h3>
+          <ul>
+            <li>Anno 1: Progettazione esecutiva e permessi</li>
+            <li>Anno 2: Costruzione e installazione impianti</li>
+            <li>Anno 3: Inaugurazione e apertura alla comunità</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 10 — CONCLUSIONI
+    ══════════════════════════════════════════════ -->
+    <section>
+      <h2>Tre anni, tre lezioni</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>3° Anno — Comunicare</h3>
+          <p>Il tirocinio mi ha insegnato che trasmettere conoscenza richiede ascolto, adattamento e la capacità di accendere entusiasmo negli altri.</p>
+        </div>
+        <div class="card">
+          <h3>4° Anno — Fare scienza</h3>
+          <p>Il laboratorio mi ha mostrato il valore del rigore metodologico e il legame tra tecnica scientifica e applicazione reale.</p>
+        </div>
+        <div class="card">
+          <h3>5° Anno — Progettare</h3>
+          <p>EnergyHub mi ha dimostrato che sostenibilità e innovazione non sono concetti astratti, ma soluzioni realizzabili con visione e metodo.</p>
+        </div>
+      </div>
+      <p class="footer-quote">Il PCTO mi ha consegnato tre strumenti essenziali: la parola, il metodo, il progetto.</p>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1280,
+    height: 720,
+    margin: 0,
+    minScale: 0.2,
+    maxScale: 2.0,
+    controls: true,
+    progress: true,
+    center: true,
+    hash: false,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'none',
+    slideNumber: false,
+    overview: true,
+    touch: true,
+    keyboard: true
+  });
+</script>
+</body>
+</html>
